@@ -9,13 +9,13 @@ angular.module('myApp.addPost', ['ngRoute'])
 
 	$scope.upload = function(files){
 
-			$scope.files = files;
-		        if (files && files.length > 0) {
+		        if (files && files.length) {
 		        for (var i = 0; i < files.length; i++) {
-		        	var file = files[i];
-            	console.log(file);
-         		file.upload = Upload.dataUrl(file, disallowObjectUrl).then(function(url){
+		        	
+            	console.log(files);
+         		$scope.upload = Upload.dataUrl(files, disallowObjectUrl).then(function(url){
         		//console.log(url);
+
         	});
 
          		file.upload.then(function (response) {
