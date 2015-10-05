@@ -35,7 +35,8 @@ angular.module('myApp.home', ['ngRoute'])
  		fb.update({
  			title:   $scope.postToUpdate.title,
  			post:   $scope.postToUpdate.post,
- 			emailId:   $scope.postToUpdate.emailId
+ 			emailId:   $scope.postToUpdate.emailId,
+ 			images: $scope.postToUpdate.images
  		}, function(error) {
  			if (error) {
  				console.log('Error:', error);
@@ -67,10 +68,9 @@ angular.module('myApp.home', ['ngRoute'])
  		
  		});
  	}
-/*
- 	$scope.logout = function() {
-		CommonProp.logoutUser();
-	}
-*/
+
+ 	$scope.remove = function(array, index){
+    array.splice(index, 1);
+}
 
 }]);

@@ -11,7 +11,7 @@ angular.module('myApp.addPost', ['ngRoute'])
 	/***** Add data to firebase *****/
 	$scope.AddPost = function(files) {
 			var fb = new Firebase("https://hotelboard.firebaseio.com/Articles/");
-			
+
 			var title = $scope.article.title;
 			var post  = $scope.article.post;
 			var user  = CommonProp.getUser();
@@ -28,7 +28,6 @@ angular.module('myApp.addPost', ['ngRoute'])
 					console.log("Error:",error);
 				} else {
 				console.log("Post set successfully!");
-				console.log(images);
 				$location.path('/home');
 				$scope.$apply();
 			
@@ -37,7 +36,11 @@ angular.module('myApp.addPost', ['ngRoute'])
 		});
 
 	});
+}
+	
 
-	}
+	$scope.remove = function(array, index){
+    array.splice(index, 1);
+}
  
 }]);

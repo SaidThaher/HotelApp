@@ -15,7 +15,6 @@
     "angularfire": "~1.1.2",
     "firebase": "~2.2.9",
     "html5-boilerplate": "~5.2.0",
-    "ng-file-upload": "~8.0.6",
-    "ng-file-upload-shim": "~8.0.1"
+    "ng-file-upload": "~9.0.6"
   }
 }
