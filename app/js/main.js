@@ -1,19 +1,8 @@
+(function (angular) {
 'use strict';
  
-angular.module('myApp.main', [
-	'ngRoute',
-	'firebase'
-
-])
+angular.module('myApp.main', [])
  
-// Declared route 
-.config(['$routeProvider', function($routeProvider) {
-    $routeProvider.when('/main', {
-        templateUrl: 'templates/main.html',
-        controller: 'MainCtrl'
-    })
-
-}])
 
  
 // Main controller
@@ -69,3 +58,4 @@ angular.module('myApp.main', [
 			}
 		};
 	}])
+})(angular);

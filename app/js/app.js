@@ -3,6 +3,7 @@
 // Declare app level module which depends on views, and components
 angular.module('myApp', [
   'ngRoute',
+  'firebase',
   'angularModalService',
   'myApp.main',
   'myApp.register',
@@ -14,7 +15,22 @@ angular.module('myApp', [
 ])
 .config(['$routeProvider', function($routeProvider) {
  	$routeProvider
- 	.when('/addPost', {
+  .when('/main', {
+        templateUrl: 'templates/main.html',
+        controller: 'MainCtrl'
+    })
+
+  .when('/register', {
+        templateUrl: 'templates/register.html',
+        controller: 'RegisterCtrl'
+    })
+
+  .when('/home', {
+        templateUrl: 'templates/home.html',
+        controller: 'HomeCtrl'
+    })
+
+  .when('/addPost', {
         templateUrl: 'templates/addPost.html',
         controller: 'AddPostCtrl'
     })

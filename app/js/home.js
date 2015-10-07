@@ -1,15 +1,9 @@
 'use strict';
  
-angular.module('myApp.home', ['ngRoute'])
+angular.module('myApp.home', [])
  
-.config(['$routeProvider', function($routeProvider) {
-    $routeProvider.when('/home', {
-        templateUrl: 'templates/home.html',
-        controller: 'HomeCtrl'
-    });
-}])
  
-.controller('HomeCtrl', ['$scope','CommonProp','$firebase','$firebaseArray','$firebaseObject','$location', function($scope,CommonProp,$firebase,$firebaseArray,$firebaseObject,$location) {
+.controller('HomeCtrl', ['$scope','CommonProp','$firebaseArray','$firebaseObject','$location', function($scope,CommonProp,$firebaseArray,$firebaseObject,$location) {
  	$scope.username = CommonProp.getUser();
 
  	if(!$scope.username){
@@ -31,6 +25,9 @@ angular.module('myApp.home', ['ngRoute'])
 
  	$scope.update = function() {
  		var fb = new Firebase(url + $scope.postToUpdate.$id);
+ 		if($scope.postToUpdate.images == undefined){
+ 			$scope.postToUpdate.images = null;
+ 		}
  	
  		fb.update({
  			title:   $scope.postToUpdate.title,

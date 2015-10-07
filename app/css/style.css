@@ -36,31 +36,31 @@ h6, .h6 {
  * Masthead for nav
  */
 
-.blog-masthead {
+.page-masthead {
   background-color: #428bca;
   -webkit-box-shadow: inset 0 -2px 5px rgba(0,0,0,.1);
           box-shadow: inset 0 -2px 5px rgba(0,0,0,.1);
 }
 
 /* Nav links */
-.blog-nav-item {
+.page-nav-item {
   position: relative;
   display: inline-block;
   padding: 10px;
   font-weight: 500;
   color: #cdddeb;
 }
-.blog-nav-item:hover,
-.blog-nav-item:focus {
+.page-nav-item:hover,
+.page-nav-item:focus {
   color: #fff;
   text-decoration: none;
 }
 
 /* Active state gets a caret at the bottom */
-.blog-nav .active {
+.page-nav .active {
   color: #fff;
 }
-.blog-nav .active:after {
+.page-nav .active:after {
   position: absolute;
   bottom: 0;
   left: 50%;
@@ -76,20 +76,20 @@ h6, .h6 {
 
 
 /*
- * Blog name and description
+ * page name and description
  */
 
-.blog-header {
+.page-header {
   padding-top: 20px;
   padding-bottom: 20px;
 }
-.blog-title {
+.page-title {
   margin-top: 30px;
   margin-bottom: 0;
   font-size: 60px;
   font-weight: normal;
 }
-.blog-description {
+.page-description {
   font-size: 20px;
   color: #999;
 }
@@ -99,7 +99,7 @@ h6, .h6 {
  * Main column and sidebar layout
  */
 
-.blog-main {
+.page-main {
   font-size: 18px;
   line-height: 1.5;
 }
@@ -136,17 +136,17 @@ h6, .h6 {
 
 
 /*
- * Blog posts
+ * page posts
  */
 
-.blog-post {
+.page-post {
   margin-bottom: 60px;
 }
-.blog-post-title {
+.page-post-title {
   margin-bottom: 5px;
   font-size: 40px;
 }
-.blog-post-meta {
+.page-post-meta {
   margin-bottom: 20px;
   color: #999;
 }
@@ -156,14 +156,14 @@ h6, .h6 {
  * Footer
  */
 
-.blog-footer {
+.page-footer {
   padding: 10px 0;
   color: #999;
   text-align: center;
   background-color: #f9f9f9;
   border-top: 1px solid #e5e5e5;
 }
-.blog-footer p:last-child {
+.page-footer p:last-child {
   margin-bottom: 0;
 }
 
@@ -178,4 +178,8 @@ h6, .h6 {
 
 .row{
   margin-top: 10px;
+}
+
+.form-group > p {
+  color: red;
 }

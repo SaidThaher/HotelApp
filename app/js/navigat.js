@@ -1,6 +1,6 @@
 'use strict';
  
-angular.module('myApp.navigat', ['ngRoute'])
+angular.module('myApp.navigat', [])
 
   .controller('NavbarCtrl', ['$scope','$location','CommonProp', function($scope, $location,CommonProp) {
 
