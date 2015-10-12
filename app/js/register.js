@@ -1,10 +1,11 @@
+(function (angular) {
 'use strict';
  
-angular.module('myApp.register', [])
+var app = angular.module('myApp.register', [])
  
  
 // Register controller
-.controller('RegisterCtrl', ['$scope','$location', '$firebaseAuth', function($scope,$location, $firebaseAuth) {
+app.controller('RegisterCtrl', ['$scope','$location', '$firebaseAuth', function($scope,$location, $firebaseAuth) {
 	var fb = new Firebase("https://hotelboard.firebaseio.com/");
 	var authObj = $firebaseAuth(fb);
 
@@ -28,3 +29,4 @@ angular.module('myApp.register', [])
 	};
  
 }]);
+  })(angular);

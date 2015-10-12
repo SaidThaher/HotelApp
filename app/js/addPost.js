@@ -1,8 +1,10 @@
+(function (angular) {
 'use strict';
  
-angular.module('myApp.addPost', [])
+var app = angular.module('myApp.addPost', [])
  
-.controller('AddPostCtrl', ['$scope','CommonProp','$location','Upload','$timeout', function($scope,CommonProp,$location,Upload,$timeout) {
+app.controller('AddPostCtrl', ['$scope','$rootScope','CommonProp','$location','Upload','$timeout', function($scope,$rootScope,CommonProp,$location,Upload,$timeout) {
+	
 	if(!CommonProp.getUser()){
     $location.path('/main');
 	}
@@ -10,21 +12,20 @@ angular.module('myApp.addPost', [])
 
 	/***** Add data to firebase *****/
 	$scope.AddPost = function(files) {
-			var fb = new Firebase("https://hotelboard.firebaseio.com/Articles/");
+			var url = "https://hotelboard.firebaseio.com/";
+			var category = $scope.Category;
 
+			var fb = new Firebase(url + category);
 
-			var title = $scope.article.title;
-			var post  = $scope.article.post;
-			var user  = CommonProp.getUser();
-			
+			//if NO Files been selected	
 			if (files == undefined){
 
-						fb.push({
-						title:     title,
-						post:      post,
-						emailId:   user,
+			fb.push({
+						title:     $scope.article.title,
+						post:      $scope.article.post,
+						emailId:   CommonProp.getUser(),
 						images : null,
-						'.priority': user
+						'.priority': CommonProp.getUser()
 						
 					},function(error) {
 						if (error) {
@@ -32,22 +33,21 @@ angular.module('myApp.addPost', [])
 						} else {
 						console.log("Post set successfully!");
 						$location.path('/home');
+						console.log(category);
 						$scope.$apply();
-					
-					}
-						
+					}	
 				});
 
 			} else {
-
+				//if Files selcted
 			Upload.base64DataUrl(files).then(function(base64Urls){
 
 				fb.push({
-					title:     title,
-					post:      post,
-					emailId:   user,
+					title:     $scope.article.title,
+					post:      $scope.article.post,
+					emailId:   CommonProp.getUser(),
 					images : base64Urls,
-					'.priority': user
+					'.priority': CommonProp.getUser()
 					
 				},function(error) {
 					if (error) {
@@ -64,8 +64,6 @@ angular.module('myApp.addPost', [])
 			});
 		}
 }
-	
-
 	$scope.remove = function(array, index){
     array.splice(index, 1);
 
@@ -73,3 +71,4 @@ angular.module('myApp.addPost', [])
 }
  
 }]);
+})(angular);

@@ -1,12 +1,10 @@
 (function (angular) {
 'use strict';
  
-angular.module('myApp.main', [])
- 
-
+var app = angular.module('myApp.main', [])
  
 // Main controller
-.controller('MainCtrl', ['$scope','$location','CommonProp','$firebaseAuth', function($scope,$location,CommonProp,$firebaseAuth) {
+app.controller('MainCtrl', ['$scope','$location','CommonProp','$firebaseAuth', function($scope,$location,CommonProp,$firebaseAuth) {
 	var fb = new Firebase("https://hotelboard.firebaseio.com/");
 	var loginObj = $firebaseAuth(fb);
 	
@@ -33,7 +31,7 @@ angular.module('myApp.main', [])
 }])
 
 //CommonProp serive to share user info from another controller
-.service('CommonProp', ['$location','$firebaseAuth',function($location,$firebaseAuth) {
+app.service('CommonProp', ['$location','$firebaseAuth',function($location,$firebaseAuth) {
 		var user = '';
 		var fb = new Firebase("https://hotelboard.firebaseio.com/");
 		var loginObj = $firebaseAuth(fb);

@@ -1,7 +1,8 @@
+(function (angular) {
 'use strict';
 
 // Declare app level module which depends on views, and components
-angular.module('myApp', [
+var app = angular.module('myApp', [
   'ngRoute',
   'firebase',
   'angularModalService',
@@ -13,7 +14,8 @@ angular.module('myApp', [
   'ngFileUpload'
   
 ])
-.config(['$routeProvider', function($routeProvider) {
+
+app.config(['$routeProvider', function($routeProvider) {
  	$routeProvider
   .when('/main', {
         templateUrl: 'templates/main.html',
@@ -39,4 +41,4 @@ angular.module('myApp', [
     })
 
 }]);
-
+})(angular);

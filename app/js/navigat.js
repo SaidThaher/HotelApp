@@ -1,8 +1,9 @@
+(function (angular) {
 'use strict';
- 
-angular.module('myApp.navigat', [])
+ //Navigation controller 
+var app = angular.module('myApp.navigat', [])
 
-  .controller('NavbarCtrl', ['$scope','$location','CommonProp', function($scope, $location,CommonProp) {
+  app.controller('NavbarCtrl', ['$scope','$location','CommonProp', function($scope, $location,CommonProp) {
 
    $scope.isRouteActive = function(route) { 
         var curRoute = $location.path();
@@ -13,3 +14,4 @@ angular.module('myApp.navigat', [])
 	}
 
 }]);
+  })(angular);

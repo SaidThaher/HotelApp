@@ -1,35 +1,42 @@
+(function (angular) {
 'use strict';
  
-angular.module('myApp.home', [])
+var app = angular.module('myApp.home', [])
  
  
-.controller('HomeCtrl', ['$scope','CommonProp','$firebaseArray','$firebaseObject','$location', function($scope,CommonProp,$firebaseArray,$firebaseObject,$location) {
+app.controller('HomeCtrl', ['$scope','$rootScope','CommonProp','$firebaseArray','$firebaseObject','$location', function($scope,$rootScope,CommonProp,$firebaseArray,$firebaseObject,$location) {
  	$scope.username = CommonProp.getUser();
 
  	if(!$scope.username){
     $location.path('/main');
 	}
 
- 	var url = "https://hotelboard.firebaseio.com/Articles/";
+ 	var url = "https://hotelboard.firebaseio.com/";
  	var fb = new Firebase(url);
- 	var fbObj = fb.startAt($scope.username).endAt($scope.username);	
-
  	
- 	$scope.articles = $firebaseArray(fbObj);
+ 	
 
- 	$scope.editPost = function(id) {
- 		var fb = new Firebase(url + id);
- 		$scope.postToUpdate = $firebaseObject(fb);
+ 	$scope.articles = $firebaseArray(fb);
+ 	
+ 	
+ 	//Show the edit modal and grap the data from the selected post
+ 	$scope.editPost = function(id,key) {
+ 		var fbE = new Firebase(url + id + '/' + key);
+ 		
+ 		$scope.postToUpdate = $firebaseObject(fbE);
  		$('#editModal').modal();
+ 		console.log($firebaseObject(fbE));
  	}
-
+ 	//Update procces 
  	$scope.update = function() {
- 		var fb = new Firebase(url + $scope.postToUpdate.$id);
+ 		
+ 		var fbU = $scope.postToUpdate.$ref();
+ 		console.log($firebaseObject(fbU));
  		if($scope.postToUpdate.images == undefined){
  			$scope.postToUpdate.images = null;
  		}
  	
- 		fb.update({
+ 		fbU.update({
  			title:   $scope.postToUpdate.title,
  			post:   $scope.postToUpdate.post,
  			emailId:   $scope.postToUpdate.emailId,
@@ -39,24 +46,21 @@ angular.module('myApp.home', [])
  				console.log('Error:', error);
  			} else {
  				$('#editModal').modal('hide');
-
-
  			}
- 		
  		});
  	}
-
- 	$scope.confirmDelete = function(id) {
- 		var fb = new Firebase(url + id);
- 		$scope.postToDelete = $firebaseObject(fb);
+ 	//show the confirm delete modal with warning message
+ 	$scope.confirmDelete = function(id,key) {
+ 		var fbC = new Firebase(url + id +'/' + key);
+ 		$scope.postToDelete = $firebaseObject(fbC);
  		$('#deleteModal').modal();
  		
  	}
-
+ 	//delete procces
 	$scope.deletePost = function() {
- 		var fb = new Firebase(url + $scope.postToDelete.$id);
- 	
- 		fb.remove(function(error) {
+ 		
+ 		var fbD = $scope.postToDelete.$ref();
+ 		fbD.remove(function(error) {
  			if (error) {
  				console.log('Error:', error);
  			} else {
@@ -71,3 +75,4 @@ angular.module('myApp.home', [])
 }
 
 }]);
+})(angular);
