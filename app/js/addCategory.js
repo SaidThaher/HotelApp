@@ -1,9 +1,9 @@
 (function (angular) {
 'use strict';
  
-var app = angular.module('myApp.addPost', [])
+var app = angular.module('myApp.addCategory', [])
  
-app.controller('AddPostCtrl', ['$scope','$rootScope','CommonProp','$location','Upload','$timeout', function($scope,$rootScope,CommonProp,$location,Upload,$timeout) {
+app.controller('AddCategoryCtrl', ['$scope','$rootScope','CommonProp','$location','Upload','$timeout', function($scope,$rootScope,CommonProp,$location,Upload,$timeout) {
 	
 	if(!CommonProp.getUser()){
     $location.path('/main');
@@ -11,7 +11,7 @@ app.controller('AddPostCtrl', ['$scope','$rootScope','CommonProp','$location','U
 
 
 	/***** Add data to firebase *****/
-	$scope.AddPost = function(files) {
+	$scope.AddCategory = function(files) {
 			var url = "https://hotelboard.firebaseio.com/";
 			var fb = new Firebase(url);
 
@@ -19,7 +19,7 @@ app.controller('AddPostCtrl', ['$scope','$rootScope','CommonProp','$location','U
 			var category = $scope.Category;
 
 			var newFb = fb.child("users/" + fbAuth.uid + "/" + category)
-			
+
 			//if NO Files been selected	
 			if (files == undefined){
 

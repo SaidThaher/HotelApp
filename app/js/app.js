@@ -9,7 +9,7 @@ var app = angular.module('myApp', [
   'myApp.main',
   'myApp.register',
   'myApp.home',
-  'myApp.addPost',
+  'myApp.addCategory',
   'myApp.navigat',
   'ngFileUpload'
 
@@ -33,9 +33,9 @@ app.config(['$routeProvider', function($routeProvider) {
         controller: 'HomeCtrl'
     })
 
-  .when('/addPost', {
-        templateUrl: 'templates/addPost.html',
-        controller: 'AddPostCtrl'
+  .when('/addCategory', {
+        templateUrl: 'templates/addCategory.html',
+        controller: 'AddCategoryCtrl'
     })
 	.otherwise({
         redirectTo: '/main'
