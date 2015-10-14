@@ -13,19 +13,21 @@ app.controller('AddPostCtrl', ['$scope','$rootScope','CommonProp','$location','U
 	/***** Add data to firebase *****/
 	$scope.AddPost = function(files) {
 			var url = "https://hotelboard.firebaseio.com/";
+			var fb = new Firebase(url);
+
+			var fbAuth = fb.getAuth();
 			var category = $scope.Category;
 
-			var fb = new Firebase(url + category);
-
+			var newFb = fb.child("users/" + fbAuth.uid + "/" + category)
 			//if NO Files been selected	
 			if (files == undefined){
 
-			fb.push({
+			newFb.push({
 						title:     $scope.article.title,
 						post:      $scope.article.post,
 						emailId:   CommonProp.getUser(),
-						images : null,
-						'.priority': CommonProp.getUser()
+						images :   null
+						
 						
 					},function(error) {
 						if (error) {
@@ -42,12 +44,12 @@ app.controller('AddPostCtrl', ['$scope','$rootScope','CommonProp','$location','U
 				//if Files selcted
 			Upload.base64DataUrl(files).then(function(base64Urls){
 
-				fb.push({
+				newFb.push({
 					title:     $scope.article.title,
 					post:      $scope.article.post,
 					emailId:   CommonProp.getUser(),
-					images : base64Urls,
-					'.priority': CommonProp.getUser()
+					images : base64Urls
+					
 					
 				},function(error) {
 					if (error) {

@@ -11,36 +11,38 @@ app.controller('HomeCtrl', ['$scope','$rootScope','CommonProp','$firebaseArray',
     $location.path('/main');
 	}
 
- 	var url = "https://hotelboard.firebaseio.com/";
- 	var fb = new Firebase(url);
+ 	var url    = "https://hotelboard.firebaseio.com/";
+ 	var fb     = new Firebase(url);
+ 	var fbAuth = fb.getAuth();
  	
- 	
+ 	var fbObj  = fb.child("users/").orderByKey().equalTo(fbAuth.uid);
 
- 	$scope.articles = $firebaseArray(fb);
+ 	//View the data
+ 	$scope.categories = $firebaseArray(fbObj);
  	
  	
- 	//Show the edit modal and grap the data from the selected post
- 	$scope.editPost = function(id,key) {
- 		var fbE = new Firebase(url + id + '/' + key);
+ 	//Show the edit modal and grap the data from the selected post using user id , category, and kay  
+ 	$scope.editPost = function(id,cat,key) {
+ 		var fbE = new Firebase(url + 'users/' + id + '/' + cat + '/' + key);
  		
  		$scope.postToUpdate = $firebaseObject(fbE);
  		$('#editModal').modal();
- 		console.log($firebaseObject(fbE));
+ 		
  	}
  	//Update procces 
  	$scope.update = function() {
  		
  		var fbU = $scope.postToUpdate.$ref();
- 		console.log($firebaseObject(fbU));
+ 		//If user deleted the image while update 
  		if($scope.postToUpdate.images == undefined){
  			$scope.postToUpdate.images = null;
  		}
  	
  		fbU.update({
- 			title:   $scope.postToUpdate.title,
- 			post:   $scope.postToUpdate.post,
+ 			title:     $scope.postToUpdate.title,
+ 			post:      $scope.postToUpdate.post,
  			emailId:   $scope.postToUpdate.emailId,
- 			images: $scope.postToUpdate.images
+ 			images:    $scope.postToUpdate.images
  		}, function(error) {
  			if (error) {
  				console.log('Error:', error);
@@ -49,13 +51,15 @@ app.controller('HomeCtrl', ['$scope','$rootScope','CommonProp','$firebaseArray',
  			}
  		});
  	}
- 	//show the confirm delete modal with warning message
- 	$scope.confirmDelete = function(id,key) {
- 		var fbC = new Firebase(url + id +'/' + key);
+
+ 	//show the confirm delete modal with warning message for deleting the post using user id , category, and kay 
+ 	$scope.confirmDelete = function(id,cat,key) {
+ 		var fbC = new Firebase(url + 'users/' + id + '/' + cat + '/' + key);
  		$scope.postToDelete = $firebaseObject(fbC);
  		$('#deleteModal').modal();
  		
  	}
+
  	//delete procces
 	$scope.deletePost = function() {
  		
