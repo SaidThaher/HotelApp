@@ -19,12 +19,12 @@ app.controller('MainCtrl', ['$scope','$location','CommonProp','$firebaseAuth', f
 			password: password
 		})
 		.then(function(user) {
-			console.log('Authentication successful');
+			swal("Success!", "Authentication successful!", "success");
 			CommonProp.setUser(user.password.email);
 			$location.path('/home');
 
 		}, function(error) {
-			console.log('Authentication failure');
+			swal("Oops...", "Something went wrong!", "error");
 		});
 	}
 	
@@ -51,7 +51,7 @@ app.service('CommonProp', ['$location','$firebaseAuth',function($location,$fireb
 				loginObj.$unauth();
 				user='';
     			localStorage.removeItem('userEmail');
-				console.log('done logout!!!');
+    			swal("Success!", "Logout successfully!", "success");
 				$location.path('/main');
 			}
 		};

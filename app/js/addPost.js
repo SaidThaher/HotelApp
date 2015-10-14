@@ -19,6 +19,7 @@ app.controller('AddPostCtrl', ['$scope','$rootScope','CommonProp','$location','U
 			var category = $scope.Category;
 
 			var newFb = fb.child("users/" + fbAuth.uid + "/" + category)
+			
 			//if NO Files been selected	
 			if (files == undefined){
 
@@ -33,9 +34,8 @@ app.controller('AddPostCtrl', ['$scope','$rootScope','CommonProp','$location','U
 						if (error) {
 							console.log("Error:",error);
 						} else {
-						console.log("Post set successfully!");
+						swal("Success!", "Added successfully!", "success");
 						$location.path('/home');
-						console.log(category);
 						$scope.$apply();
 					}	
 				});
@@ -55,7 +55,7 @@ app.controller('AddPostCtrl', ['$scope','$rootScope','CommonProp','$location','U
 					if (error) {
 						console.log("Error:",error);
 					} else {
-					console.log("Post set successfully!");
+					swal("Success!", "Added successfully!", "success");
 					$location.path('/home');
 					$scope.$apply();
 				

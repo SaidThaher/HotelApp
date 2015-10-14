@@ -17,7 +17,7 @@ app.controller('RegisterCtrl', ['$scope','$location', '$firebaseAuth', function(
 			if (email && password) {
 				authObj.$createUser({email, password})
 					.then(function() {
-						console.log('User creation success');
+						swal("User Created Successfully");
 						$location.path('/main');
 					}, function(error) {
 						console.log(error);
