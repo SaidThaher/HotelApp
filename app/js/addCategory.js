@@ -1,7 +1,7 @@
 (function (angular) {
 'use strict';
  
-var app = angular.module('myApp.addCategory', [])
+var app = angular.module('myApp.addCategory', []);
  
 app.controller('AddCategoryCtrl', ['$scope','$rootScope','CommonProp','$location','Upload','$timeout', function($scope,$rootScope,CommonProp,$location,Upload,$timeout) {
 	
@@ -18,7 +18,7 @@ app.controller('AddCategoryCtrl', ['$scope','$rootScope','CommonProp','$location
 			var fbAuth = fb.getAuth();
 			var category = $scope.Category;
 
-			var newFb = fb.child("users/" + fbAuth.uid + "/" + category)
+			var newFb = fb.child("users/" + fbAuth.uid + '/Category/' + category)
 
 			//if NO Files been selected	
 			if (files == undefined){

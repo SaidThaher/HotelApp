@@ -16,7 +16,11 @@ app.controller('RegisterCtrl', ['$scope','$location', '$firebaseAuth', function(
 
 			if (email && password) {
 				authObj.$createUser({email, password})
-					.then(function() {
+					.then(function(userData) {
+						fb.child('users/' + userData.uid).set({
+							HotelCode : email
+						});
+						
 						swal("User Created Successfully");
 						$location.path('/main');
 					}, function(error) {

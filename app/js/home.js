@@ -4,7 +4,7 @@
 var app = angular.module('myApp.home', [])
  
  
-app.controller('HomeCtrl', ['$scope','$rootScope','CommonProp','$firebaseArray','$firebaseObject','$location', function($scope,$rootScope,CommonProp,$firebaseArray,$firebaseObject,$location) {
+app.controller('HomeCtrl', ['$scope','CommonProp','$firebaseArray','$firebaseObject','$location', function($scope,CommonProp,$firebaseArray,$firebaseObject,$location) {
  	$scope.username = CommonProp.getUser();
 
  	if(!$scope.username){
@@ -20,10 +20,12 @@ app.controller('HomeCtrl', ['$scope','$rootScope','CommonProp','$firebaseArray',
  	//View the data
  	$scope.categories = $firebaseArray(fbObj);
  	
+ 	console.log($scope.categories);
+ 	
  	
  	//Show the edit modal and grap the data from the selected post using user id , category, and kay  
- 	$scope.editPost = function(id,cat,key) {
- 		var fbE = new Firebase(url + 'users/' + id + '/' + cat + '/' + key);
+ 	$scope.editPost = function(id,link,cat,key) {
+ 		var fbE = new Firebase(url + 'users/' + id + '/' + link + '/' + cat + '/' + key);
  		
  		$scope.postToUpdate = $firebaseObject(fbE);
  		$('#editModal').modal();
@@ -53,8 +55,8 @@ app.controller('HomeCtrl', ['$scope','$rootScope','CommonProp','$firebaseArray',
  	}
 
  	//show the confirm delete modal with warning message for deleting the post using user id , category, and kay 
- 	$scope.confirmDelete = function(id,cat,key) {
- 		var fbC = new Firebase(url + 'users/' + id + '/' + cat + '/' + key);
+ 	$scope.confirmDelete = function(id,link,cat,key) {
+ 		var fbC = new Firebase(url + 'users/' + id + '/' + link + '/' + cat + '/' + key);
  		$scope.postToDelete = $firebaseObject(fbC);
  		$('#deleteModal').modal();
  		

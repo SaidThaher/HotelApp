@@ -24,7 +24,7 @@ app.controller('MainCtrl', ['$scope','$location','CommonProp','$firebaseAuth', f
 			$location.path('/home');
 
 		}, function(error) {
-			swal("Oops...", "Something went wrong!", "error");
+			swal("Oops...", error, "error");
 		});
 	}
 	
