@@ -15,17 +15,21 @@ app.controller('HomeCtrl', ['$scope','CommonProp','$firebaseArray','$firebaseObj
  	var fb     = new Firebase(url);
  	var fbAuth = fb.getAuth();
  	
- 	var fbObj  = fb.child("users/").orderByKey().equalTo(fbAuth.uid);
-
  	//View the data
- 	$scope.categories = $firebaseArray(fbObj);
- 	
- 	console.log($scope.categories);
+ 	 fb.child("users/").orderByKey().equalTo(fbAuth.uid).once('value',function(snap){
+ 		snap.forEach(function(shot){
+ 			var fbData = fb.child('users/'+ shot.key() + '/Category');
+
+ 			$scope.categories = $firebaseArray(fbData);
+ 			
+ 		})
+
+ 	});
  	
  	
  	//Show the edit modal and grap the data from the selected post using user id , category, and kay  
- 	$scope.editPost = function(id,link,cat,key) {
- 		var fbE = new Firebase(url + 'users/' + id + '/' + link + '/' + cat + '/' + key);
+ 	$scope.editPost = function(id,key) {
+ 		var fbE = new Firebase(url + 'users/' + fbAuth.uid + '/Category/' + id + '/' + key );
  		
  		$scope.postToUpdate = $firebaseObject(fbE);
  		$('#editModal').modal();
@@ -55,8 +59,8 @@ app.controller('HomeCtrl', ['$scope','CommonProp','$firebaseArray','$firebaseObj
  	}
 
  	//show the confirm delete modal with warning message for deleting the post using user id , category, and kay 
- 	$scope.confirmDelete = function(id,link,cat,key) {
- 		var fbC = new Firebase(url + 'users/' + id + '/' + link + '/' + cat + '/' + key);
+ 	$scope.confirmDelete = function(id,key) {
+ 		var fbC = new Firebase(url + 'users/' + fbAuth.uid + '/Category/' + id + '/' + key);
  		$scope.postToDelete = $firebaseObject(fbC);
  		$('#deleteModal').modal();
  		

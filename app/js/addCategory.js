@@ -3,7 +3,7 @@
  
 var app = angular.module('myApp.addCategory', []);
  
-app.controller('AddCategoryCtrl', ['$scope','$rootScope','CommonProp','$location','Upload','$timeout', function($scope,$rootScope,CommonProp,$location,Upload,$timeout) {
+app.controller('AddCategoryCtrl', ['$scope','CommonProp','$location','Upload','$timeout', function($scope,CommonProp,$location,Upload,$timeout) {
 	
 	if(!CommonProp.getUser()){
     $location.path('/main');
