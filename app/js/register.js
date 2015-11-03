@@ -13,12 +13,14 @@ app.controller('RegisterCtrl', ['$scope','$location', '$firebaseAuth', function(
 		if (!$scope.regForm.$invalid) {
 			var email    = $scope.user.email;
 			var password = $scope.user.password;
+			var hotelname = $scope.user.hotelname;
 
 			if (email && password) {
 				authObj.$createUser({email, password})
 					.then(function(userData) {
 						fb.child('users/' + userData.uid).set({
-							HotelCode : email
+							HotelCode : email,
+							HotelName : hotelname
 						});
 						
 						swal("User Created Successfully");

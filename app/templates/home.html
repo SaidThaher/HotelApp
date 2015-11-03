@@ -3,30 +3,48 @@
 
         <div class="container" ng-controller="HomeCtrl">
             <div class="page-header">
-                <h1>Hotel Board</h1>
+                <h1>{{hotelname}}</h1>
+                <p>Your Hotel Code : <b>{{username}}</b></p>
             </div>
-            <p class="lead">Welcome to Hotel Board <b>{{username}}</b>!!</p>
+            
+            <p class="lead">Welcome to Hotel Board <b>{{hotelname}}</b>!!</p>
 
+                    <div class="list-group">
+                    <h1>Hotel Pictures</h1>
+                        <span class="list-group-item active">
+                            <div class="row">
+                            <div ng-repeat="picture in pictures">
+                                <div class="col-sm-2" ng-repeat="image in picture.images">
+                                    <img ng-src="{{image}}" width="70px" height="70px" >
+                                    <span class="glyphicon glyphicon-remove-circle" ng-click="deleteImage(picture.$id)"></span>
+
+                                </div>
+                                </div>
+                            </div>
+                        </span>  
+                    </div>
+            
+                    <!-- View the data -->
                     <div class="list-group" ng-repeat="category in categories">
 
                             <h1>{{category.$id}}</h1>
                         <div class="list-group" ng-repeat="(key,cat) in category">
                             <span class="list-group-item active" >
 
-                                <h4 class="list-group-item-heading">{{cat.title}}</h4>
-                                <p class="list-group-item-text">{{cat.post}}</p>
+                                        <h4 class="list-group-item-heading">{{cat.title}}</h4>
+                                        <p class="list-group-item-text">{{cat.post}}</p>
 
-                                    <div class="row">
-                                        <div class="col-sm-2" ng-repeat="image in cat.images">
-                                            <img ng-show="cat.images"  ng-src={{image}} width="50px" height="50px" >
+                                        <div class="row">
+                                            <div class="col-sm-2" ng-repeat="image in cat.images">
+                                                <img ng-show="cat.images"  ng-src={{image}} width="50px" height="50px" >
+                                            </div>
                                         </div>
-                                    </div>
-                                            <span class="pull-right" >
+                                        <span class="pull-right" >
 
-                                                <button class="btn btn-xs btn-info" ng-click="editPost(category.$id,key)" data-target="#editModal">EDIT</button>
+                                            <button class="btn btn-xs btn-info" ng-click="editPost(category.$id,key)" data-target="#editModal">EDIT</button>
 
-                                                <button class="btn btn-xs btn-warning" ng-click="confirmDelete(category.$id,key)" data-target="#deleteModal">DELETE</button>
-                                            </span>
+                                            <button class="btn btn-xs btn-warning" ng-click="confirmDelete(category.$id,key)" data-target="#deleteModal">DELETE</button>
+                                        </span>
                             </span>
                         </div>
                     </div>

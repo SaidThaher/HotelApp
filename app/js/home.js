@@ -18,12 +18,23 @@ app.controller('HomeCtrl', ['$scope','CommonProp','$firebaseArray','$firebaseObj
  	//View the data
  	 fb.child("users/").orderByKey().equalTo(fbAuth.uid).once('value',function(snap){
  		snap.forEach(function(shot){
- 			var fbData = fb.child('users/'+ shot.key() + '/Category');
+ 			shot.forEach(function(data){
 
- 			$scope.categories = $firebaseArray(fbData);
- 			
+ 				data.forEach(function(elem){
+ 					elem.forEach(function(pic){
+
+			 			var fbData = fb.child('users/'+ shot.key() + '/Category');
+			 			var fbHotelName = fb.child('users/'+ shot.key() + '/HotelName');
+			 			var fbImages = fb.child('users/'+ shot.key() + '/pictures');
+			 			
+			 			$scope.categories = $firebaseArray(fbData);
+			 			$scope.hotelname = shot.val().HotelName;
+			 			$scope.pictures = $firebaseArray(fbImages);
+
+ 					})
+ 				})
+ 			})
  		})
-
  	});
  	
  	
@@ -78,6 +89,18 @@ app.controller('HomeCtrl', ['$scope','CommonProp','$firebaseArray','$firebaseObj
  			}
  		
  		});
+ 	}
+
+ 	$scope.deleteImage = function(id){
+ 		var fbI = new Firebase(url + 'users/' + fbAuth.uid + '/pictures/' + id);
+ 		//$scope.imageToDelete = $firebaseObject(fbI);
+ 		fbI.remove(function(error) {
+ 			if(error){
+ 				console.log('Error:' , error);
+ 			}else{
+ 				console.log('sucsses');
+ 			}
+ 		})
  	}
 
  	$scope.remove = function(array, index){

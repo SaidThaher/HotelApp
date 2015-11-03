@@ -10,6 +10,7 @@ var app = angular.module('myApp', [
   'myApp.register',
   'myApp.home',
   'myApp.addCategory',
+  'myApp.addImages',
   'myApp.navigat',
   'ngFileUpload'
 
@@ -36,6 +37,11 @@ app.config(['$routeProvider', function($routeProvider) {
   .when('/addCategory', {
         templateUrl: 'templates/addCategory.html',
         controller: 'AddCategoryCtrl'
+    })
+
+  .when('/addImages', {
+        templateUrl: 'templates/addImages.html',
+        controller: 'AddImagesCtrl'
     })
 	.otherwise({
         redirectTo: '/main'
